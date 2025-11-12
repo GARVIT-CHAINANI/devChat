@@ -4,6 +4,10 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  GithubAuthProvider,
+  signOut,
 } from "firebase/auth";
 import {
   doc,
@@ -74,6 +78,54 @@ export const login = async (email, password) => {
     console.error("Login error:", err.message);
     message.error(err.message);
   }
+};
+
+//  Google Sign-in
+const googleProvider = new GoogleAuthProvider();
+export const googleSignInFn = async () => {
+  const result = await signInWithPopup(auth, googleProvider);
+  const user = result.user;
+
+  // Create Firestore doc if it doesn't exist
+  const userRef = doc(db, "users", user.uid);
+  const existingDoc = await getDoc(userRef);
+  if (!existingDoc.exists()) {
+    await setDoc(userRef, {
+      id: user.uid,
+      userName: user.displayName,
+      email: user.email,
+      name: "",
+      bio: "Hey, I'm using devChat!",
+      lastSeen: serverTimestamp(),
+    });
+  }
+  return user;
+};
+
+//  GitHub Sign-in
+const githubProvider = new GithubAuthProvider();
+export const githubSignInFn = async () => {
+  const result = await signInWithPopup(auth, githubProvider);
+  const user = result.user;
+
+  // Create Firestore doc if it doesn't exist
+  const userRef = doc(db, "users", user.uid);
+  const existingDoc = await getDoc(userRef);
+
+  const userNameToUse =
+    user.displayName || user.reloadUserInfo.screenName || "GitHub User";
+
+  if (!existingDoc.exists()) {
+    await setDoc(userRef, {
+      id: user.uid,
+      userName: userNameToUse,
+      email: user.email,
+      name: "",
+      bio: "Hey, I'm using devChat!",
+      lastSeen: serverTimestamp(),
+    });
+  }
+  return user;
 };
 
 export const getUserData = async (userUid) => {
@@ -157,4 +209,8 @@ export const getAllUsers = async () => {
     console.error("getAllUsers err", err);
     return []; // Return empty array on error
   }
+};
+
+export const logoutFN = async () => {
+  await signOut(auth);
 };

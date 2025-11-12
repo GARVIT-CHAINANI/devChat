@@ -46,7 +46,7 @@ const AuthForm = ({ isLoginMode, formTitle, submitButtonText }) => {
       }
 
       setInput({ email: "", password: "", userName: "" });
-      navigate("/dashboard");
+      navigate("/chat");
     } catch (err) {
       message.error(err.message || "Something went wrong!");
     } finally {
@@ -59,7 +59,7 @@ const AuthForm = ({ isLoginMode, formTitle, submitButtonText }) => {
       setLoading(true);
       await fn();
       message.success(`Signed in with ${provider}`);
-      navigate("/dashboard");
+      navigate("/chat");
     } catch {
       message.error(`${provider} sign-in failed`);
     } finally {

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import AuthForm from "../components/AuthForm";
-import logo from "../assets/logo.png"; // your logo here
+// import logo from "../assets/logo.png"; // your logo here
 import "./authPage.css";
+import AuthForm from "../../componets/AuthForm";
 
 const AuthPage = () => {
   const [searchParams] = useSearchParams();
@@ -20,9 +20,7 @@ const AuthPage = () => {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-left">
-          <a href="https://github.com/GARVIT-CHAINANI">
-            <img src={logo} alt="Logo" className="auth-logo" />
-          </a>
+          <a href="https://github.com/GARVIT-CHAINANI">devChat</a>
           <AuthForm
             isLoginMode={isLoginMode}
             formTitle={isLoginMode ? "Log In" : "Sign Up"}
@@ -40,10 +38,7 @@ const AuthPage = () => {
         <div className="auth-right">
           <div className="content">
             <h1>Welcome!</h1>
-            <p>
-              This login/signup page handles authentication with Firebase (Email
-              + Google + GitHub). Created for learning and demo purposes.
-            </p>
+            <p>DEVCHAT</p>
           </div>
           <div className="overlay"></div>
         </div>

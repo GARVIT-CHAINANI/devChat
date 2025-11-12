@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import Chat from "./Chat";
-import { getAllUsers } from "../../config/firebase";
+import { getAllUsers, logoutFN } from "../../config/firebase";
 import { useAuth } from "../../context/useAuth";
+import { Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
 export default function ChatParent() {
   const { currentUser } = useAuth();
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null); // object { id, userName, ... }
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -42,6 +45,14 @@ export default function ChatParent() {
           <div style={{ padding: 20 }}>Select a person to start chatting</div>
         )}
       </section>
+      <Button
+        onClick={() => {
+          logoutFN();
+          navigate("/");
+        }}
+      >
+        Log Out
+      </Button>
     </div>
   );
 }
