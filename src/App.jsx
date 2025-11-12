@@ -4,12 +4,13 @@ import Login from "./pages/login page/Login";
 import ChatParent from "./pages/chat page/ChatParent";
 import ProfileUpdate from "./pages/profie update page/ProfileUpdate";
 import { AuthProvider } from "./context/AuthProvider";
+import AuthPage from "./pages/authentication page/AuthPage";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Login />,
+      element: <AuthPage />,
     },
     {
       path: "/chat",

@@ -1,0 +1,52 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #fafafa;
+}
+
+.auth-card {
+  display: flex;
+  width: 90%;
+  max-width: 950px;
+  height: 550px;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+}
+
+.auth-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-logo {
+  width: 90px;
+  margin-bottom: 15px;
+}
+
+.auth-right {
+  flex: 1;
+  position: relative;
+  background: url("https://source.unsplash.com/800x600/?technology")
+    center/cover;
+  color: white;
+}
+
+.auth-right .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.auth-right .content {
+  position: relative;
+  z-index: 1;
+  padding: 40px;
+}
