@@ -86,7 +86,6 @@ export const googleSignInFn = async () => {
   const result = await signInWithPopup(auth, googleProvider);
   const user = result.user;
 
-  // Create Firestore doc if it doesn't exist
   const userRef = doc(db, "users", user.uid);
   const existingDoc = await getDoc(userRef);
   if (!existingDoc.exists()) {
@@ -108,7 +107,6 @@ export const githubSignInFn = async () => {
   const result = await signInWithPopup(auth, githubProvider);
   const user = result.user;
 
-  // Create Firestore doc if it doesn't exist
   const userRef = doc(db, "users", user.uid);
   const existingDoc = await getDoc(userRef);
 
@@ -150,7 +148,7 @@ export const getUserData = async (userUid) => {
 //   }
 // };
 
-// Helper to generate consistent chatId
+// generate chatId
 export const getChatId = (uid1, uid2) => {
   return uid1 > uid2 ? uid1 + uid2 : uid2 + uid1;
 };
@@ -161,7 +159,6 @@ export const sendMessageFn = async (senderUid, receiverUid, text) => {
     const chatDocRef = doc(db, "chats", chatId);
     const messageRef = collection(chatDocRef, "messages");
 
-    // add message
     await addDoc(messageRef, {
       senderUid,
       receiverUid,
@@ -169,7 +166,6 @@ export const sendMessageFn = async (senderUid, receiverUid, text) => {
       createdAt: serverTimestamp(),
     });
 
-    // create or update chat info
     await setDoc(
       chatDocRef,
       {
@@ -183,7 +179,7 @@ export const sendMessageFn = async (senderUid, receiverUid, text) => {
     console.log("Message sent!");
   } catch (err) {
     console.error("Error sending message:", err);
-    throw err; // Re-throw so UI can handle it
+    throw err;
   }
 };
 

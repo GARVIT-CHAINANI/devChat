@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-// import logo from "../assets/logo.png"; // your logo here
 import "./authPage.css";
 import AuthForm from "../../componets/AuthForm";
+import logo from "../../assets/devChat_logo.png";
 
 const AuthPage = () => {
   const [searchParams] = useSearchParams();
@@ -20,15 +20,17 @@ const AuthPage = () => {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-left">
-          <a href="https://github.com/GARVIT-CHAINANI">devChat</a>
-          <AuthForm
-            isLoginMode={isLoginMode}
-            formTitle={isLoginMode ? "Log In" : "Sign Up"}
-            submitButtonText={isLoginMode ? "Login" : "Register"}
-          />
+          <a href="https://github.com/GARVIT-CHAINANI">
+            <img src={logo} alt="devChat" />
+          </a>
+
           <footer>
             Built by{" "}
-            <a href="https://github.com/GARVIT-CHAINANI" target="_blank">
+            <a
+              href="https://github.com/GARVIT-CHAINANI"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Garvit Chainani
             </a>{" "}
             using React.js
@@ -37,10 +39,12 @@ const AuthPage = () => {
 
         <div className="auth-right">
           <div className="content">
-            <h1>Welcome!</h1>
-            <p>DEVCHAT</p>
+            <AuthForm
+              isLoginMode={isLoginMode}
+              formTitle={isLoginMode ? "Login" : "Sign Up"}
+              submitButtonText={isLoginMode ? "Login Now" : "Sign Up Now"}
+            />
           </div>
-          <div className="overlay"></div>
         </div>
       </div>
     </div>

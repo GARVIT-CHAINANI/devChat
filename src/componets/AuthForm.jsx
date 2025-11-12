@@ -6,7 +6,7 @@ import {
   signup,
   googleSignInFn,
   githubSignInFn,
-} from "../config/firebase"; // adjust names to match your utils
+} from "../config/firebase";
 import { GoogleOutlined, GithubFilled } from "@ant-design/icons";
 import "./authForm.css";
 
@@ -68,7 +68,7 @@ const AuthForm = ({ isLoginMode, formTitle, submitButtonText }) => {
   };
 
   return (
-    <form className="auth-form" onSubmit={handleSubmit}>
+    <div className="auth-form">
       <h2>{formTitle}</h2>
 
       {!isLoginMode && (
@@ -105,6 +105,7 @@ const AuthForm = ({ isLoginMode, formTitle, submitButtonText }) => {
         htmlType="submit"
         loading={loading}
         className="auth-btn"
+        onClick={handleSubmit}
       >
         {submitButtonText}
       </Button>
@@ -131,7 +132,7 @@ const AuthForm = ({ isLoginMode, formTitle, submitButtonText }) => {
       <p className="switch-mode">
         {isLoginMode ? (
           <>
-            Don’t have an account?{" "}
+            Create an account{" "}
             <a
               href="?mode=signup"
               onClick={(e) => {
@@ -139,7 +140,7 @@ const AuthForm = ({ isLoginMode, formTitle, submitButtonText }) => {
                 navigate("?mode=signup");
               }}
             >
-              Sign Up
+              Click here
             </a>
           </>
         ) : (
@@ -157,7 +158,7 @@ const AuthForm = ({ isLoginMode, formTitle, submitButtonText }) => {
           </>
         )}
       </p>
-    </form>
+    </div>
   );
 };
 
