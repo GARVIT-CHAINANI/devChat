@@ -4,28 +4,42 @@ import ChatParent from "./pages/chat page/ChatParent";
 import ProfileUpdate from "./pages/profie update page/ProfileUpdate";
 import { AuthProvider } from "./context/AuthProvider";
 import AuthPage from "./pages/authentication page/AuthPage";
+import ProtectedRoutes from "./protectedRoutes/ProtectedRoutes";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <AuthPage />,
+      element: (
+        <AuthProvider>
+          <AuthPage />
+        </AuthProvider>
+      ),
     },
     {
-      path: "/chat",
-      element: <ChatParent />,
+      element: (
+        <AuthProvider>
+          <ProtectedRoutes />
+        </AuthProvider>
+      ),
+      children: [
+        {
+          path: "/chat",
+          element: <ChatParent />,
+        },
+      ],
     },
     {
       path: "/profile",
-      element: <ProfileUpdate />,
+      element: (
+        <AuthProvider>
+          <ProfileUpdate />
+        </AuthProvider>
+      ),
     },
   ]);
 
-  return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

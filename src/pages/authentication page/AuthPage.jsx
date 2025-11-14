@@ -33,7 +33,8 @@ const AuthPage = () => {
             >
               Garvit Chainani
             </a>{" "}
-            using React.js
+            using React.js and firebase | A real time chat app | thanks for
+            using
           </footer>
         </div>
 

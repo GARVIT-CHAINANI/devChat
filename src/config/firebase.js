@@ -63,6 +63,7 @@ export const signup = async (userName, email, password) => {
     message.success("Signup successful!");
     return user;
   } catch (err) {
+    `  `;
     console.error("Signup error:", err.message);
     message.error(err.message);
   }

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button, message } from "antd";
-import { useNavigate } from "react-router-dom";
 import {
   login,
   signup,
@@ -9,6 +8,7 @@ import {
 } from "../config/firebase";
 import { GoogleOutlined, GithubFilled } from "@ant-design/icons";
 import "./authForm.css";
+import { useNavigate } from "react-router-dom";
 
 const AuthForm = ({ isLoginMode, formTitle, submitButtonText }) => {
   const [input, setInput] = useState({
@@ -46,7 +46,6 @@ const AuthForm = ({ isLoginMode, formTitle, submitButtonText }) => {
       }
 
       setInput({ email: "", password: "", userName: "" });
-      navigate("/chat");
     } catch (err) {
       message.error(err.message || "Something went wrong!");
     } finally {
@@ -59,7 +58,6 @@ const AuthForm = ({ isLoginMode, formTitle, submitButtonText }) => {
       setLoading(true);
       await fn();
       message.success(`Signed in with ${provider}`);
-      navigate("/chat");
     } catch {
       message.error(`${provider} sign-in failed`);
     } finally {
